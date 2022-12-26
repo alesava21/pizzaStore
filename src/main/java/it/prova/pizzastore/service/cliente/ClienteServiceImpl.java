@@ -11,8 +11,8 @@ import it.prova.pizzastore.repository.cliente.ClienteRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class ClienteServiceImpl implements ClienteService{
-	
+public class ClienteServiceImpl implements ClienteService {
+
 	@Autowired
 	private ClienteRepository clienteRepository;
 
@@ -23,28 +23,33 @@ public class ClienteServiceImpl implements ClienteService{
 
 	@Override
 	public Cliente caricaSingoloCliente(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return clienteRepository.findById(id).orElse(null);
 	}
 
 	@Override
+	@Transactional
 	public void aggiorna(Cliente clienteInstance) {
-		// TODO Auto-generated method stub
-		
+		clienteRepository.save(clienteInstance);
+
 	}
 
 	@Override
+	@Transactional
 	public void InserisciNuovo(Cliente clienteInstance) {
-		// TODO Auto-generated method stub
-		
+		clienteRepository.save(clienteInstance);
+
 	}
 
 	@Override
+	@Transactional
 	public void rimuovi(Long idRemove) {
-		// TODO Auto-generated method stub
+		Cliente clienteInstance = clienteRepository.findById(idRemove).orElse(null);
 		
+		clienteInstance.attivo(false);
+		
+		clienteRepository.save(clienteInstance);
 	}
-	
+
 	@Override
 	public List<Cliente> findByExample(Cliente example) {
 		// TODO Auto-generated method stub
