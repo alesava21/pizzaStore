@@ -6,15 +6,15 @@ import it.prova.pizzastore.model.Cliente;
 
 public interface ClienteService {
 	
-	public List<Cliente> listAll();
+	public List<Cliente> listAll();	
 	
-	public Cliente caricaSingoloCliente();
+	public Cliente caricaSingoloCliente(Long id);
 	
-	public void aggiorna();
+	public void aggiorna(Cliente clienteInstance);
 	
-	public void InserisciNuovo();
+	public void InserisciNuovo(Cliente clienteInstance);
 	
-	public void rimuovi();
+	public void rimuovi(Long idRemove);
 	
 	public List<Cliente> findByExample(Cliente example);
 
