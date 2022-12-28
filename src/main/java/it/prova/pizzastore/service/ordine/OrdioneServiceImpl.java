@@ -21,6 +21,11 @@ public class OrdioneServiceImpl implements OrdineService{
 	public Ordine caricaSingoloOrdine(Long id) {
 		return ordineRepository.findById(id).orElse(null);
 	}
+	
+	@Override
+	public Ordine caricaSingoloOrdineEager(Long id) {
+		return ordineRepository.findByIdEager(id).orElse(null);
+	}
 
 	@Override
 	public void aggiorna(Ordine ordineInstance) {

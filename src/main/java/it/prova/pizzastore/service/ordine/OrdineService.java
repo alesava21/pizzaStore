@@ -10,6 +10,8 @@ public interface OrdineService {
 	
 	public Ordine caricaSingoloOrdine(Long id);
 	
+	public Ordine caricaSingoloOrdineEager(Long id);
+	
 	public void aggiorna (Ordine ordineInstance);
 	
 	public void inserisciNuovo(Ordine ordineInstance);
