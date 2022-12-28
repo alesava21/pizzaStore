@@ -40,7 +40,7 @@ public class PizzaServiceImpl implements PizzaService {
 		pizzaReload.ingredienti(pizzaInstance.ingredienti());
 		pizzaReload.prezzoBase(pizzaInstance.prezzoBase());
 
-		return pizzaRepository.save(pizzaInstance);
+		return pizzaRepository.save(pizzaReload);
 
 	}
 

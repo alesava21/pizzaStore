@@ -12,12 +12,14 @@ public interface OrdineService {
 	
 	public Ordine caricaSingoloOrdineEager(Long id);
 	
-	public void aggiorna (Ordine ordineInstance);
+	public Ordine aggiorna (Ordine ordineInstance);
 	
-	public void inserisciNuovo(Ordine ordineInstance);
+	public Ordine inserisciNuovo(Ordine ordineInstance);
 	
 	public void elimina(Long idRemove);
 	
 	public List<Ordine> findByExample(Ordine example);
+	
+	public Integer calcolaPrezzoOrdine(Long idOrdine);
 
 }
