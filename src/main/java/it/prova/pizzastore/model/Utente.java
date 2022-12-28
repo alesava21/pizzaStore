@@ -1,9 +1,8 @@
 package it.prova.pizzastore.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,22 +38,16 @@ public class Utente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	@Column(name = "nome")
-	private String nome;
-	@Column(name = "cognome")
-	private String cognome;
 	@Column(name = "username")
 	private String username;
 	@Column(name = "password")
 	private String password;
-	@Column(name = "datecreated")
-	private Date dateCreated;
-	@Column(name = "dataregistrazione")
-	private LocalDate dataRegistrazione;
-	@Column(name = "esperienzaaccumulata")
-	private Integer esperienzaAccumulata;
-	@Column(name = "creditoaccumulato")
-	private Integer creditoAccumulato;
+	@Column(name = "nome")
+	private String nome;
+	@Column(name = "cognome")
+	private String cognome;
+	@Column(name = "dateCreated")
+	private LocalDate dateCreated;
 
 	@Enumerated(EnumType.STRING)
 	private StatoUtente stato;
@@ -62,7 +55,7 @@ public class Utente {
 	@Builder.Default
 	@ManyToMany
 	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "ID"))
-	private List<Ruolo> ruoli = new ArrayList<>();
+	private Set<Ruolo> ruoli = new HashSet<>(0);
 
 	public boolean isAttivo() {
 		return this.stato != null && this.stato.equals(StatoUtente.ATTIVO);

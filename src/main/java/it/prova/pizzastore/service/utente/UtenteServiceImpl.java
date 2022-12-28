@@ -1,6 +1,6 @@
 package it.prova.pizzastore.service.utente;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class UtenteServiceImpl implements UtenteService {
 	@Transactional
 	public void inserisciNuovo(Utente utenteInstance) {
 		utenteInstance.stato(StatoUtente.CREATO).password(passwordEncoder.encode(utenteInstance.password()));
-		utenteInstance.dateCreated(new Date());
+		utenteInstance.dateCreated(LocalDate.now());
 		repository.save(utenteInstance);
 	}
 
