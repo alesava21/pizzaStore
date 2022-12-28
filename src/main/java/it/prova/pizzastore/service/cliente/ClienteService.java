@@ -10,9 +10,9 @@ public interface ClienteService {
 	
 	public Cliente caricaSingoloCliente(Long id);
 	
-	public void aggiorna(Cliente clienteInstance);
+	public Cliente aggiorna(Cliente clienteInstance);
 	
-	public void InserisciNuovo(Cliente clienteInstance);
+	public Cliente InserisciNuovo(Cliente clienteInstance);
 	
 	public void rimuovi(Long idRemove);
 	

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.pizzastore.model.Cliente;
 import it.prova.pizzastore.repository.cliente.ClienteRepository;
+import it.prova.pizzastore.web.api.exeption.ClienteNotFound;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,15 +29,26 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	@Transactional
-	public void aggiorna(Cliente clienteInstance) {
-		clienteRepository.save(clienteInstance);
+	public Cliente aggiorna(Cliente clienteInstance) {
+		Cliente clienteReloadCliente = clienteRepository.findById(clienteInstance.id()).orElse(null);
+		if (clienteReloadCliente == null) {
+			throw new ClienteNotFound("Cliente non trovato");
+
+		}
+
+		clienteReloadCliente.nome(clienteInstance.nome());
+		clienteReloadCliente.cognome(clienteInstance.cognome());
+		clienteReloadCliente.indirizzo(clienteInstance.indirizzo());
+
+		return clienteRepository.save(clienteInstance);
 
 	}
 
 	@Override
 	@Transactional
-	public void InserisciNuovo(Cliente clienteInstance) {
-		clienteRepository.save(clienteInstance);
+	public Cliente InserisciNuovo(Cliente clienteInstance) {
+
+		return clienteRepository.save(clienteInstance);
 
 	}
 
@@ -44,9 +56,9 @@ public class ClienteServiceImpl implements ClienteService {
 	@Transactional
 	public void rimuovi(Long idRemove) {
 		Cliente clienteInstance = clienteRepository.findById(idRemove).orElse(null);
-		
+
 		clienteInstance.attivo(false);
-		
+
 		clienteRepository.save(clienteInstance);
 	}
 
