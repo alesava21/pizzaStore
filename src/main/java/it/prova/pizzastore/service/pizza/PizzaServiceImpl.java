@@ -8,11 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.pizzastore.model.Pizza;
 import it.prova.pizzastore.repository.pizza.PizzaRepository;
+import it.prova.pizzastore.web.api.exeption.PizzaNotFound;
 
 @Service
 @Transactional(readOnly = true)
-public class PizzaServiceImpl implements PizzaService{
-	
+public class PizzaServiceImpl implements PizzaService {
+
 	@Autowired
 	private PizzaRepository pizzaRepository;
 
@@ -27,15 +28,28 @@ public class PizzaServiceImpl implements PizzaService{
 	}
 
 	@Override
-	public void aggiorna(Pizza pizzaInstance) {
-		pizzaRepository.save(pizzaInstance);
-		
+	public Pizza aggiorna(Pizza pizzaInstance) {
+		Pizza pizzaReload = pizzaRepository.findById(pizzaInstance.id()).orElse(null);
+
+		if (pizzaReload == null) {
+			throw new PizzaNotFound("Non e stato possibile trovare nessuna pizza con questo id");
+
+		}
+
+		pizzaReload.descrizione(pizzaInstance.descrizione());
+		pizzaReload.ingredienti(pizzaInstance.ingredienti());
+		pizzaReload.prezzoBase(pizzaInstance.prezzoBase());
+
+		return pizzaRepository.save(pizzaInstance);
+
 	}
 
 	@Override
-	public void inserisciNuovo(Pizza pizzaInstance) {
-		pizzaRepository.save(pizzaInstance);
-		
+	public Pizza inserisciNuovo(Pizza pizzaInstance) {
+
+		pizzaInstance.attivo(true);
+		return pizzaRepository.save(pizzaInstance);
+
 	}
 
 	@Override
@@ -47,6 +61,21 @@ public class PizzaServiceImpl implements PizzaService{
 	public List<Pizza> findByExample(Pizza example) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void calbiaAbilitation(Long id) {
+		Pizza pizzaInstant = caricaSigolaPizza(id);
+		if (pizzaInstant == null)
+			throw new PizzaNotFound("Non e stato possibile trovare nessuna pizza con questo id");
+
+		if (pizzaInstant.attivo()) {
+			pizzaInstant.attivo(false);
+
+		} else {
+			pizzaInstant.attivo(true);
+		}
+
 	}
 
 }
