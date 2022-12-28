@@ -51,7 +51,7 @@ public class Ordine {
 	private Boolean closed;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "utente_id")
+	@JoinColumn(name = "utente_id", nullable = false)
 	private Utente fattorino;
 
 	@ManyToOne(fetch = FetchType.LAZY)

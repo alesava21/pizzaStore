@@ -54,7 +54,7 @@ public class UtenteDTO {
 	
 	
 	
-	public Utente buildutenteModel(boolean includeIdRoles) {
+	public Utente buildUtenteModel(boolean includeIdRoles) {
 		Utente result = Utente.builder()
 				.id(id)
 				.username(username)
@@ -73,7 +73,7 @@ public class UtenteDTO {
 	}
 	
 	//no password
-	public UtenteDTO buildUtenteDTOFromModel(Utente utenteModel) {
+	public static UtenteDTO buildUtenteDTOFromModel(Utente utenteModel) {
 		UtenteDTO result = UtenteDTO.builder()
 				.id(utenteModel.id())
 				.username(utenteModel.username())
