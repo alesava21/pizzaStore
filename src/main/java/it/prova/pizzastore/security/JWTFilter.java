@@ -37,7 +37,7 @@ public class JWTFilter extends OncePerRequestFilter {
 		String authHeader = request.getHeader("Authorization");
 
 		// Checking if the header contains a Bearer token
-		if (StringUtils.isNotBlank(authHeader) && authHeader.startsWith("Bearer ")) {
+		if (StringUtils.isNotBlank(authHeader) && authHeader.startsWith("Bearer")) {
 			// Extract JWT
 			String jwt = authHeader.substring(7);
 			if (StringUtils.isBlank(jwt)) {
