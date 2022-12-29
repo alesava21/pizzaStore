@@ -28,6 +28,7 @@ public class PizzaServiceImpl implements PizzaService {
 	}
 
 	@Override
+	@Transactional
 	public Pizza aggiorna(Pizza pizzaInstance) {
 		Pizza pizzaReload = pizzaRepository.findById(pizzaInstance.id()).orElse(null);
 
@@ -45,6 +46,7 @@ public class PizzaServiceImpl implements PizzaService {
 	}
 
 	@Override
+	@Transactional
 	public Pizza inserisciNuovo(Pizza pizzaInstance) {
 
 		pizzaInstance.attivo(true);
@@ -53,6 +55,7 @@ public class PizzaServiceImpl implements PizzaService {
 	}
 
 	@Override
+	@Transactional
 	public void elimina(Long id) {
 		pizzaRepository.deleteById(id);
 	}
