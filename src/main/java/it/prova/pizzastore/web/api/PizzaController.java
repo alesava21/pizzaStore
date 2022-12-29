@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import it.prova.pizzastore.dto.PizzaDTO;
 import it.prova.pizzastore.model.Pizza;
 import it.prova.pizzastore.service.pizza.PizzaService;
-import it.prova.pizzastore.web.api.exeption.ClienteNotFound;
 import it.prova.pizzastore.web.api.exeption.PizzaNotFound;
 
 @RestController
@@ -49,7 +48,7 @@ public class PizzaController {
 		Pizza pizza = pizzaService.caricaSigolaPizza(id);
 
 		if (pizza == null)
-			throw new ClienteNotFound("Pizza not found con id: " + id);
+			throw new PizzaNotFound("Pizza not found con id: " + id);
 
 		return PizzaDTO.buildPizzaDTOFromModel(pizza);
 	}
@@ -58,11 +57,11 @@ public class PizzaController {
 	public void elimina(@PathVariable(value = "id", required = true) long id) {
 		pizzaService.elimina(id);
 	}
-	
+
 	@GetMapping("changeAbilitation/{id}")
 	public void changeAbilitation(@PathVariable(value = "id", required = true) long id) {
 		pizzaService.calbiaAbilitation(id);
-		
+
 	}
 
 	@PutMapping("/{id}")
@@ -70,7 +69,7 @@ public class PizzaController {
 		Pizza pizza = pizzaService.caricaSigolaPizza(id);
 
 		if (pizza == null)
-			throw new ClienteNotFound("Cliente not found con id: " + id);
+			throw new PizzaNotFound("Pizza not found con id: " + id);
 
 		pizzaInput.setId(id);
 		Pizza pizzaAggiornato = pizzaService.aggiorna(pizzaInput.buildPizzaModel());
