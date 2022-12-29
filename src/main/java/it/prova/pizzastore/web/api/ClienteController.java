@@ -69,4 +69,9 @@ public class ClienteController {
 		return ClienteDTO.createClienteDTOListFromModelList(clienteService.findByExample(example.buildClienteModel()));
 	}
 
+	@GetMapping("changeAbilitation/{id}")
+	public void changeAbilitation(@PathVariable(value = "id", required = true) long id) {
+		clienteService.cambiaAbilitazione(id);
+	}
+
 }

@@ -67,4 +67,19 @@ public class ClienteServiceImpl implements ClienteService {
 		return clienteRepository.findByExample(example);
 	}
 
+	@Override
+	@Transactional
+	public void cambiaAbilitazione(Long id) {
+		Cliente clienteInstance = caricaSingoloCliente(id);
+		if (clienteInstance == null)
+			throw new ClienteNotFound("Elemento non trovato.");
+
+		if (clienteInstance.attivo()) {
+			clienteInstance.attivo(false);
+		} else {
+			clienteInstance.attivo(true);
+		}
+		
+	}
+
 }

@@ -17,5 +17,7 @@ public interface ClienteService {
 	public void rimuovi(Long idRemove);
 	
 	public List<Cliente> findByExample(Cliente example);
+	
+	public void cambiaAbilitazione(Long id);
 
 }
