@@ -43,7 +43,7 @@ public class ClienteDTO {
 
 	public static ClienteDTO buildClienteDTOFromModel(Cliente clienteModel) {
 		return ClienteDTO.builder().id(clienteModel.id()).nome(clienteModel.nome()).cognome(clienteModel.cognome())
-				.attivo(clienteModel.attivo()).build();
+				.indirizzo(clienteModel.indirizzo()).attivo(clienteModel.attivo()).build();
 	}
 
 	public static List<ClienteDTO> createClienteDTOListFromModelList(List<Cliente> modelListInput) {
